@@ -4,8 +4,9 @@ on:
      branches:
         -"develop"
 env: 
-    GCP_PROJECT_ID : ${{secrets.GCP_PROJECT_ID}}
-    TF_STATE_BUCKET_NAME: ${{secrets.GCP_TF_STATE_BUCKET}}
+    GCP_PROJECT_ID : ${{ secrets.GCP_PROJECT_ID }}
+    TF_STATE_BUCKET_NAME: ${{ secrets.GCP_TF_STATE_BUCKET }}
+
 jobs:
     deploy:
         runs-on : ubuntu-latest
