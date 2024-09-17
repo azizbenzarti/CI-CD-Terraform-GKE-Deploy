@@ -23,15 +23,15 @@ jobs:
               with:
                 token_format: 'access_token'
                 workload_identity_provider: 'projects/547492547037/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
-                service_account: 'cicd-tf-gke@$GCP_PROJECT_ID.iam.gserviceaccount.com'
+                service_account: 'cicd-tf-gke@sunlit-segment-414720.iam.gserviceaccount.com'
             - uses: 'google-github-actions/setup-gcloud@v1'
             - name: docker auth
               run: gcloud auth configure-docker
             - run: gcloud auth list
             - name: Build and push docker image
               run: |
-                docker build -t us.gcr.io/$GCP_PROJECT_ID/nodeappimage:$IMAGE_TAG .
-                 docker push us.gcr.io/$GCP_PROJECT_ID/nodeappimage:$IMAGE_TAG
+                docker build -t us.gcr.io/sunlit-segment-414720/nodeappimage:$IMAGE_TAG .
+                 docker push us.gcr.io/sunlit-segment-414720/nodeappimage:$IMAGE_TAG
               working-directory : ./nodeapp
             - uses: hashicorp/setup-terraform@v2
             - name : Terraform init 
@@ -41,8 +41,8 @@ jobs:
               run : |
                 terraform plan \
                 -var="region=us-central1" \ 
-                -var="project_id=$GCP_PROJECT_ID" \
-                -var="container_image=us.gcr.io/$GCP_PROJECT_ID/nodeappimage:$IMAGE_TAG" \
+                -var="project_id=sunlit-segment-414720" \
+                -var="container_image=us.gcr.io/sunlit-segment-414720/nodeappimage:$IMAGE_TAG" \
                 -out=PLAN
               working-directory: ./terraform
             - name: Terraform Apply
